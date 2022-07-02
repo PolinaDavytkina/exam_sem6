@@ -22,7 +22,7 @@ const QString PromoWindow::getRandomString() {
   const uint randomStringLength = PROMO_LENGTH;
   QString randomString;
   for (uint i = 0; i < randomStringLength; ++i) {
-    int index = rand() % possibleCharacters.length();
+    uint index = rand() % possibleCharacters.length();
     QChar nextChar = possibleCharacters.at(index);
     randomString.append(nextChar);
   }
@@ -34,8 +34,12 @@ void PromoWindow::initPromo() {
 
   for (uint i = 0; i < fieldSize; i++) {
     const auto promo = getRandomString();
-    promos.append(promo);
-    addCard(promo);
+    const auto encPromo = crypton.encrypt(promo);
+
+    qDebug() << promo << " : " << encPromo;
+
+    promos.append(encPromo);
+    addCard(encPromo);
   }
 }
 
@@ -59,13 +63,14 @@ void PromoWindow::on_openPromoButton_clicked() {
     const auto itemWidget =
         dynamic_cast<CardWidget*>(ui->cardsListWidget->itemWidget(item));
 
-    itemWidget->showPromo();
+    itemWidget->showPromo(crypton.decrypt(promos[randomIndex]));
     openedPromos.append(randomIndex);
     fieldSize++;
 
     const auto promo = getRandomString();
-    promos.append(promo);
-    addCard(promo);
+    const auto encpromo = crypton.encrypt(promo);
+    promos.append(encpromo);
+    addCard(encpromo);
 
     break;
   }

@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include <QVector>
 
+#include "crypton.h"
+#include "password.h"
+
 namespace Ui {
 class PromoWindow;
 }
@@ -30,6 +33,8 @@ class PromoWindow : public QMainWindow {
 
   QVector<QString> promos;
   QVector<uint> openedPromos;
+
+  Crypton crypton = Crypton(GOOD_PASSWORD);
 };
 
 #endif  // PROMOWINDOW_H

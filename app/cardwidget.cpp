@@ -16,4 +16,6 @@ const QString CardWidget::getPromo() { return promo; }
 
 void CardWidget::setPromo(const QString promo) { this->promo = promo; }
 
-void CardWidget::showPromo() { ui->promoButton->setText(promo); }
+void CardWidget::showPromo(const QString promo) {
+  ui->promoButton->setText(promo);
+}
