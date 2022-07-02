@@ -18,7 +18,7 @@ class CardWidget : public QWidget {
 
   void setPromo(const QString promo);
   const QString getPromo();
-  void showPromo();
+  void showPromo(const QString promo);
 
  private:
   Ui::CardWidget *ui;

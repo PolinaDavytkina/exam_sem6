@@ -2,6 +2,7 @@
 
 #include <QMessageBox>
 
+#include "password.h"
 #include "promowindow.h"
 #include "ui_mainwindow.h"
 
@@ -20,7 +21,6 @@ inline void goToNextWindow(MainWindow* w) {
 
 void MainWindow::on_loginButton_clicked() {
   const auto PASSWORD = ui->passwordEdit->text();
-  const auto GOOD_PASSWORD = "123";
 
   if (PASSWORD != GOOD_PASSWORD) {
     QMessageBox::critical(this, "Login Failed", "Try to type password again.");
